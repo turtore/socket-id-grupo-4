@@ -12,17 +12,15 @@ function PostCard({ id, username, message }) {
     })
   }, []);
   
-  const handleClick = () => {
-    socket.emit('inserPost', { id, username, message} );
-  }
+  // const handleClick = () => {
+  //   socket.emit('inserPost', { id, username, message} );
+  // }
 
   return (
-    <div>
       <tr>
         <td> {username} </td>
-        <td> {message} </td>
+          <td> {message} </td>
       </tr>
-    </div>
   );
 }
 
