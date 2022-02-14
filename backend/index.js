@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const http = require('http').createServer(app);
 
-const LanguageController = require('./controllers/languageController');
+const postController = require('./controllers/postController');
 
 // instanciado na linha 1
 // const app = express()
@@ -29,8 +29,8 @@ app.get('/', (req, res) => {
 // GET /languages
 // POST /languages
 // PUT /languages
-app.use('/languages', LanguageController);
+app.use('/languages', postController);
 
-require('./sockets/votes')(io); // qual o papel ? ? ? ?
+require('./sockets/posts')(io); // qual o papel ? ? ? ?
 
 http.listen(port, () => console.log(`Example app listening on port ${port}!`))
