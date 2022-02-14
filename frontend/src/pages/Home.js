@@ -1,40 +1,37 @@
 import React, { useEffect, useState } from 'react';
 
-import { CardGroup } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
-import LanguageCard from '../components/LanguageCard';
+import PostCard from '../components/PostCard';
 
 function Home() {
   const [isLoading, setIsLoading] = useState(false);
-  const [languages, setLanguages] = useState([]);
+  const [messages, setMessages] = useState([]);
   
   useEffect(() => {
     setIsLoading(true);
     fetch('http://localhost:3001/languages')
       .then((response) => response.json())
-      .then((languages) => {
+      .then((messages) => {
         setIsLoading(false);
-        setLanguages(languages);
+        setMessages(messages);
       });
   }, []);
 
   return (
     <div>
-      <h1>Escolha sua linguagem favorita:</h1>
+      <h1>Mural de depoimentos</h1>
 
       {isLoading ? <p>Carregando</p>
         : ( 
-          <CardGroup>
-            {languages.map(({_id, name, image, votes}, index) => (
-              <LanguageCard
-                key={_id}
-                index={index}
-                id={_id}
-                name={name} 
-                image={image}
-                votes={votes} />
+          <Table>
+            {messages.map(({ username, message}, index) => (
+              <PostCard
+                key={index}
+                username={username} 
+                message={message} />
             ))}
-          </CardGroup>
+          </Table>
       )}
     </div>
   );
